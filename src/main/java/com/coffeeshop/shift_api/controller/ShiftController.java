@@ -5,6 +5,7 @@ import com.coffeeshop.shift_api.service.ShiftService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/shifts")
@@ -22,5 +23,14 @@ public class ShiftController {
         Shift savedShift = shiftService.scheduleShift(newShift);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedShift);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Shift>> getShiftsByStaff(@RequestParam Long staffId) {
+        // Ask the Chef for the shifts
+        List<Shift> shifts = shiftService.getShiftsForStaff(staffId);
+
+        // Return 200 OK with the list of shifts!
+        return ResponseEntity.ok(shifts);
     }
 }

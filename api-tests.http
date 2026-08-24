@@ -1,0 +1,26 @@
+### 1. Create a Barista
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "David",
+  "email": "david@coffeeshop.com",
+  "passwordHash": "hashed_password_123",
+  "role": "BARISTA"
+}
+
+### 2. Schedule a Shift for Sarah (Assuming Sarah gets ID 1)
+POST http://localhost:8080/api/v1/shifts
+Content-Type: application/json
+
+{
+  "staff": {
+    "id": 3
+  },
+  "startTime": "2026-08-25T09:00:00Z",
+  "endTime": "2026-08-25T17:00:00Z",
+  "status": "scheduled"
+}
+
+### 3. Fetch Sarah's Schedule
+GET http://localhost:8080/api/v1/shifts?staffId=3
